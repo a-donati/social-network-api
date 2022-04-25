@@ -18,13 +18,8 @@ const thoughtSchema = new Schema(
             type: String,
             required: true
         },
-        // nested documents
-        reactions: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'reactionSchema'
-            }
-        ]
+        // nested documents referencing reactionSchema
+        reactions: [reactionSchema]
     },
     {
         toJSON: {
