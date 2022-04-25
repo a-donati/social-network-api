@@ -10,7 +10,7 @@ const userSchema = new Schema(
             unique: true,
             required: true,
             trim: true
-            
+
         },
         email: {
             type: String,
@@ -21,18 +21,27 @@ const userSchema = new Schema(
                 validator: validator.isEmail,
                 message: '{VALUE} is not a valid email',
                 isAsync: false
-              }
-          },
-          thoughts: [{
-              type: Schema.Types.ObjectId,
-              ref: 'Thought'
-          }],
-          friends: [
+            }
+        },
+        thoughts: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Thought'
+        }],
+        friends: [
             //   self reference
-              {
-                  type: Schema.types.ObjectId,
-                  ref: 'User'
-              }
-          ]
-    }
+            {
+                type: Schema.types.ObjectId,
+                ref: 'User'
+            }
+        ],
+        toJSON: {
+            getters: true,
+        },
+
+    },
+
 )
+
+const User = model('user', userSchema);
+
+module.exports = User;
