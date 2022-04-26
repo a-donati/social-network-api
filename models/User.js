@@ -16,6 +16,7 @@ const userSchema = new Schema(
             required: true,
             unique: true,
             lowercase: true,
+            // use match to validate email
             match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]
         },
         thoughts: [{
@@ -42,7 +43,7 @@ const userSchema = new Schema(
 userSchema.virtual('friendCount').get(function() {
     return this.friends.length;
 })
-
+// instantiate User model
 const User = model('user', userSchema);
 
 module.exports = User;
