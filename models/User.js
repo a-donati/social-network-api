@@ -19,23 +19,21 @@ const userSchema = new Schema(
         },
         thoughts: [{
             type: Schema.Types.ObjectId,
-            ref: 'Thought'
+            ref: 'Thoughts'
         }],
-        friends: [
-            //   self reference
-            {
-                type: Schema.types.ObjectId,
-                ref: 'User'
-            }
-        ],
+        friends: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Users'
+        }]
+        },
+        {
         toJSON: {
             virtuals: true,
             getters: true,
         },
-
-    },
-
-)
+        id: false
+        }
+    )
 
 // virtual for total number of friends
 userSchema.virtual('friendCount').get(function() {
