@@ -26,7 +26,7 @@ const reactionSchema = new Schema({
         toJSON: {
             getters: true,
         },
-            // excluding ID field in JSON response.
+        // excluding ID field in JSON response.
         id: false,
     }
 );
