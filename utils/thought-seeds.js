@@ -50,4 +50,25 @@ const usernames = [
     'Yames',
     'hamburgler',
     'gaston',
-]
+];
+
+const genRandomIndex = (arr) => Math.floor(Math.random() * arr.length);
+const getRandomThought = () => `${thoughts[genRandomIndex(thoughts)]}`;
+const getRandomUsername = () => `${usernames[genRandomIndex(usernames)]}`;
+
+
+function getRandomReaction() {
+    const numOfReactions = Math.floor(Math.random() * reactionBody.length);
+    const arrOfReactions = [];
+    for(let i = 0; i < numOfReactions; i++){
+        arrOfReactions.push({ reactionBody: reactionBody[genRandomIndex(reactionBody)], username: usernames[genRandomIndex(usernames)]})
+    }
+    return arrOfReactions;
+}
+
+function getThought(){
+    const thoughtObject = { thoughtText: getRandomThought(), username: getRandomUsername(), reactions: getRandomReaction() };
+    return thoughtObject;
+  }
+
+  module.exports = getThought;
