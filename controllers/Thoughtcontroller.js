@@ -92,15 +92,15 @@ module.exports = {
     },
 
     // delete reaction through id
-    deleteReaction({ params }, res) {
+    deleteReaction( req, res) {
         // find Thought by id, pull reaction from array
-        Thought.findOneAndUpdate({ _id: params.thoughtId }, { $pull: { reactions: { reactionId: body.reactionId } } }, { new: true })
+        Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $pull: { reactions: { reactionId: req.params.reactionId } } }, { new: true })
             .then(dbThoughtsData => {
                 if (!dbThoughtsData) {
                     res.status(404).json({ message: 'No thoughts with this particular ID!' });
                     return;
                 }
-                res.json(dbThoughtsData);
+                res.json('Deleted');
             })
             .catch(err => res.status(400).json(err));
     }

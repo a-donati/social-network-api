@@ -29,9 +29,9 @@ Access the API from the different routes below
 To access a single user or thought, add desired id to the end of the API route
 * `http://localhost:3001/api/users/:userId`
 
-* [Click here for video demo of application and API usage]()
+* [Click here for video demo of application and API usage](https://drive.google.com/file/d/19Ge1S5_3_VRlo8HFz_UvsfuzQ2QuHsYy/view)
 
-![Social network API -  GET, POST, PUT, DELETE requests demonstrated on Insomnia]()
+![Social network API -  GET, POST, PUT, DELETE requests demonstrated on Insomnia](./assets/social-network-api(2)-users.gif)
 
 
 ## References
