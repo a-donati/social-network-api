@@ -31,7 +31,7 @@ module.exports = {
     },
     // get single user
     getSingleUser(req, res) {
-        User.findOne({ _id: req.params.id })
+        User.findOne({ _id: req.params.userId })
             // populate thoughts for single user
             .populate({ path: 'thoughts', select: '-__v' })
             // populate user friends for single user
@@ -55,7 +55,7 @@ module.exports = {
     // update user by ID
     updateUser(req, res) {
         // find user by id, update, run validation
-        User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
+        User.findOneAndUpdate({ _id: req.params.userId }, req.body, { new: true, runValidators: true })
             .then(userData => {
                 if (!userData) {
                     res.status(404).json({ message: `No user found with this ID` });
@@ -69,12 +69,16 @@ module.exports = {
     // delete a user
     deleteUser(req, res) {
         // find user by id and delete
-        User.findOneAndDelete({ _id: req.params.id })
+        User.findOneAndDelete({ _id: req.params.userId })
             .then(userData => {
                 if (!userData) {
                     res.status(404).json({ message: 'No user found with this ID' });
                     return;
                 }
+                // delete associated thoughts/reactions
+                Thought.deleteMany({ reactions: {userId: req.body.params }});
+                Thought.deleteMany({ _id: req.params.userId })
+                res.json('Deleted')
                 res.json(userData);
             })
             .catch(err => res.status(400).json(err));
@@ -83,7 +87,7 @@ module.exports = {
     // add a friend
     addFriend(req, res) {
         // find user by ID, push friend to friends array
-        User.findOneAndUpdate({ _id: req.params.id }, { $push: { friends: req.params.friendId } }, { new: true })
+        User.findOneAndUpdate({ _id: req.params.userId }, { $push: { friends: req.params.friendsId } }, { new: true })
             // populate friends
             .populate({ path: 'friends', select: ('-__v') })
             .select('-__v')
@@ -100,7 +104,7 @@ module.exports = {
 
     deleteFriend(req, res) {
         // find user by id, pull friend id from friends array
-        User.findOneAndUpdate({ _id: req.params.id }, { $pull: { friends: req.params.friendId } }, { new: true })
+        User.findOneAndUpdate({ _id: req.params.userId }, { $pull: { friends: req.params.friendsId } }, { new: true })
             .populate({ path: 'friends', select: '-__v' })
             .select('-__v')
             .then(userData => {
