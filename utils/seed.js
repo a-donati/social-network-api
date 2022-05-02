@@ -7,8 +7,8 @@ const getUser = require('./user-seeds');
 // create connection to mongodb
 connection.once('open', async() => {
     // delete existing entries in collection
-    await User.deleteMany({});
-    await Thought.deleteMany({});
+    // await User.deleteMany({});
+    // await Thought.deleteMany({});
     // empty arrays to hold users and thoughts
     let users = [];
     let thoughts = [];

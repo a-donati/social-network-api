@@ -30,7 +30,7 @@ const reactionBody = [
     'We are meeting at Gothier Green Lawns later, come through',
     'What happened to Skip Broke?',
     'Who removed the pool ladder while I was swimming?',
-    'Don\t kick the grave',
+    'Dont kick the grave',
     'My psychic advisor has forbidden me from leaving the house today',
     'Be forewarned'
 ]

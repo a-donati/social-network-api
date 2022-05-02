@@ -29,6 +29,8 @@ module.exports = {
                 return res.status(500).json(err);
             });
     },
+
+    
     // get single user
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId })

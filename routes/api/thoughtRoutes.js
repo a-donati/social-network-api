@@ -10,18 +10,24 @@ const {
     deleteReaction
 } = require('../../controllers/Thoughtcontroller')
 
-// /api/thoughts - GET
-router.route('/').get(getAllThoughts);
-
+// /api/thoughts - GET - POST
+router.route('/')
+    .get(getAllThoughts)
+    .post(createThought)
 // /api/thoughts/:thoughtId - GET, PUT, DELETE
-router.route('/:thoughtId').get(getSingleThought).put(updateThought).delete(deleteThought)
-
-// /api/thoughts/:thoughtId - POST
-router.route('/:thoughtId').post(createThought);
+router
+    .route('/:thoughtId')
+    .get(getSingleThought)
+    .put(updateThought)
+    .delete(deleteThought)
 
 // /api/thoughts/:thoughtId/reactions - POST
-router.route('/:thoughtId/reactions').post(addReaction);
+router.route('/:thoughtId/reactions')
+    .post(addReaction);
 
-// /api/thoughts/:thoughtId/reactionId - DELETE
-router.route('/:thoughtId/reactions/:reactionId').delete(deleteReaction)
+// /api/thoughts/:thoughtId/:reactionId - DELETE
+router
+    .route('/:thoughtId/reactions/:reactionId')
+    .delete(deleteReaction)
+    
 module.exports = router;
