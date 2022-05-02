@@ -4,7 +4,7 @@ const userSchema = new Schema(
     {
         username: {
             type: String,
-            unique: true,
+            // unique: true,
             required: true,
             trim: true
 
@@ -13,17 +13,16 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            lowercase: true,
             // use match to validate email
             match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]
         },
         thoughts: [{
             type: Schema.Types.ObjectId,
-            ref: 'Thoughts'
+            ref: 'Thought'
         }],
         friends: [{
             type: Schema.Types.ObjectId,
-            ref: 'Users'
+            ref: 'User'
         }]
     },
     {

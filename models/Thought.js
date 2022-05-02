@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const reactionSchema = require('./Reaction');
+// const reactionSchema = require('./Reaction');
 
 // schema to create Thought model
 const thoughtSchema = new Schema(
@@ -18,14 +18,22 @@ const thoughtSchema = new Schema(
             type: String,
             required: true
         },
+        userId: {
+            type: String
+        },
         // nested documents referencing reactionSchema
-        reactions: [reactionSchema]
+        reactions: [{
+            reactionId: { type: Schema.Types.ObjectId},
+            reactionBody: { type: String, maxlength: 280, required: true },
+            username: { type: String, required: true },
+            userId: { type: String},
+            createdAt: { type: Date, default: Date.now }
+        }]
     },
     {
         toJSON: {
             virtuals: true,
         },
-        // * true ? 
         id: false,
     }
 )
